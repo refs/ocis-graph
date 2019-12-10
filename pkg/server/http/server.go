@@ -3,7 +3,7 @@ package http
 import (
 	"github.com/owncloud/ocis-graph/pkg/config"
 	"github.com/owncloud/ocis-graph/pkg/flagset"
-	"github.com/owncloud/ocis-graph/pkg/service/v0"
+	svc "github.com/owncloud/ocis-graph/pkg/service/v0"
 	"github.com/owncloud/ocis-graph/pkg/version"
 	"github.com/owncloud/ocis-pkg/middleware"
 	"github.com/owncloud/ocis-pkg/service/http"
@@ -39,6 +39,9 @@ func Server(opts ...Option) (http.Service, error) {
 			),
 			middleware.Logger(
 				options.Logger,
+			),
+			middleware.OpenIDConnect(
+				options.OpenIDConnect,
 			),
 		),
 	)
